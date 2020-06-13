@@ -1,0 +1,17 @@
+{
+  "name": "klarna-test-app",
+  "version": "0.0.1",
+  "author": "Alex Prytula",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "test": "mocha test/*.spec.js"
+  },
+  "devDependencies": {
+    "@types/chai": "4.2.11",
+    "@types/mocha": "7.0.2",
+    "chai": "4.2.0",
+    "mocha": "7.1.2",
+    "typescript": "3.9.5"
+  }
+}
