@@ -1,15 +1,16 @@
-const assert = require("chai").assert;
-const {findDuplicateTransactions} = require('../src');
-const mockTransactions = require('./data');
+import {assert} from 'chai';
+import {findDuplicateTransactions} from '../src';
+import {mockTransactions} from './data';
+import {Transaction} from '../src/interface';
 
 const oneMinuteInMilliseconds = 1000 * 60;
 
-describe("findDuplicateTransactions()", function() {
-  it("returns empty array if there are no transactions", function() {
+describe('findDuplicateTransactions()', () => {
+  it('returns empty array if there are no transactions', () => {
     assert.deepEqual(findDuplicateTransactions([]), []);
   });
   
-  it('verifies that given a list of transactions, result type will be an array', function () {
+  it('verifies that given a list of transactions, result type will be an array', () => {
      assert.typeOf(findDuplicateTransactions(mockTransactions), 'array');
   });
   
@@ -18,9 +19,9 @@ describe("findDuplicateTransactions()", function() {
     const result = findDuplicateTransactions(mockTransactions);
     for (const group of result) {
         assert.typeOf(group, 'array');
-        group.reduce((prev, curr) => {
+        group.reduce((prev: Transaction, curr: Transaction) => {
            if (curr) {
-               fieldsToExamine.forEach((field) => assert.equal(prev[field], curr[field]));
+               fieldsToExamine.forEach((field: string) => assert.equal(prev[field], curr[field]));
                assert.isBelow(new Date(prev.time), new Date(curr.time));
                assert.isOk(new Date(curr.time).getTime() - new Date(prev.time).getTime() <= oneMinuteInMilliseconds);
            }
@@ -29,9 +30,9 @@ describe("findDuplicateTransactions()", function() {
      }
   });
   
-  it('verifies that duplicated groups within a result will be also sorted in ascending order', function () {
+  it('verifies that duplicated groups within a result will be also sorted in ascending order', () => {
     const result = findDuplicateTransactions(mockTransactions);
-    result.reduce((prev, curr) => {
+    result.reduce((prev: Transaction, curr: Transaction) => {
        if (curr) {
           assert.isBelow(
               new Date(prev[0].time),

@@ -1,4 +1,6 @@
-module.exports = [ 
+import {Transaction} from '../src/interface';
+
+export const mockTransactions: Transaction[] = [ 
 	{ id: 40,
     sourceAccount: 'my_account',
     targetAccount: 'fitness_club',
